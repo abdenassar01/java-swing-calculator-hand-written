@@ -14,6 +14,9 @@ public class Calculatrice extends JFrame{
     private JPanel mainPanel;
     private JTextField textField;
     private JPanel screenPanel;
+    private JPanel programmingPanel;
+    private JPanel sciencePanel;
+    private JPanel secondSciencePanel;
     private JPanel labelPanel;
     private JPanel buttonsRow1;
     private JPanel buttonsRow2;
@@ -23,7 +26,11 @@ public class Calculatrice extends JFrame{
     private JPanel egalPanel;
     private JPanel dotZeroPanel;
     private Btn clear;
+    private Btn fact;
+    private Btn hex;
+    private Btn oct;
     private Btn benaire;
+    private Btn del;
     private Btn modulo;
     private Btn division;
     private Btn seven;
@@ -41,6 +48,14 @@ public class Calculatrice extends JFrame{
     private Btn zero;
     private Btn dot;
     private Btn egal;
+    private Btn sin;
+    private Btn cos;
+    private Btn sqrt;
+    private Btn pwrt;
+    private Btn floor;
+    private Btn ciel;
+    private Btn abs;
+    private Btn random;
     private JLabel infoLabel;
     private GridLayout grid;
     private GridLayout twoCollumnGrid;
@@ -49,19 +64,36 @@ public class Calculatrice extends JFrame{
         mainPanel = new JPanel();
         textField = new JTextField();
         screenPanel = new JPanel();
+        sciencePanel = new JPanel();
+        secondSciencePanel = new JPanel();
+        programmingPanel = new JPanel();
         labelPanel = new JPanel();
         buttonsRow1 = new JPanel();
         buttonsRow2 = new JPanel();
         buttonsRow3 = new JPanel();
         buttonsRow4 = new JPanel();
         buttonsRow5 = new JPanel();
-        clear = new Btn("C");
-        benaire = new Btn("Bin");
-        modulo = new Btn("%");
-        division = new Btn("/");
-        multiplication = new Btn("X");
-        addition = new Btn("+");
-        soubstraction = new Btn("-");
+        fact = new Btn("Fact", new Color(145, 53, 211));
+        benaire = new Btn("Bin", new Color(133, 47, 196));
+        hex = new Btn("Hex", new Color(133, 47, 196));
+        oct = new Btn("Oct", new Color(133, 47, 196));
+        
+        sin = new Btn("Sin", new Color(3, 171, 43));
+        cos = new Btn("Cos", new Color(3, 171, 43));
+        sqrt = new Btn("√", new Color(3, 171, 43));
+        pwrt = new Btn("¬", new Color(3, 171, 43));
+        random = new Btn("Rand", new Color(3, 171, 43));
+        floor = new Btn("Floor", new Color(3, 171, 43));
+        ciel = new Btn("Ciel", new Color(3, 171, 43));
+        abs = new Btn("Abs", new Color(3, 171, 43));
+        clear = new Btn("C", new Color(255, 0, 0));
+        del = new Btn("Del", new Color(255, 0, 0));
+        
+        modulo = new Btn("%", new Color(255, 50, 153));
+        division = new Btn("/", new Color(255, 50, 153));
+        multiplication = new Btn("X", new Color(255, 50, 153));
+        addition = new Btn("+", new Color(255, 50, 153));
+        soubstraction = new Btn("-", new Color(255, 50, 153));
         one = new Btn("1");
         two = new Btn("2");
         three = new Btn("3");
@@ -72,7 +104,7 @@ public class Calculatrice extends JFrame{
         eight = new Btn("8");
         nine = new Btn("9");
         zero = new Btn("0");
-        egal = new Btn("=");
+        egal = new Btn("=", new Color(0, 126, 96));
         dot = new Btn(".");
         infoLabel = new JLabel();
         egalPanel = new JPanel();
@@ -82,30 +114,60 @@ public class Calculatrice extends JFrame{
         twoCollumnGrid = new GridLayout(0, 2);
         twoCollumnGrid.setHgap(5);
         setContentPane(mainPanel);
-        GridLayout gridLayout = new GridLayout(7, 0);
-        gridLayout.setVgap(5);
+        BoxLayout boxLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         
         //container
-        mainPanel.setLayout(gridLayout);
+        mainPanel.setLayout(boxLayout);
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        mainPanel.add(screenPanel);
         mainPanel.add(labelPanel);
+        mainPanel.add(screenPanel);
+        mainPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(sciencePanel);
+        mainPanel.add(Box.createVerticalStrut(5));
+        mainPanel.add(secondSciencePanel);
+        mainPanel.add(Box.createVerticalStrut(5));
+        mainPanel.add(programmingPanel);
+        mainPanel.add(Box.createVerticalStrut(5));
         mainPanel.add(buttonsRow1);
+        mainPanel.add(Box.createVerticalStrut(5));
         mainPanel.add(buttonsRow2);
+        mainPanel.add(Box.createVerticalStrut(5));
         mainPanel.add(buttonsRow3);
+        mainPanel.add(Box.createVerticalStrut(5));
         mainPanel.add(buttonsRow4);
+        mainPanel.add(Box.createVerticalStrut(5));
         mainPanel.add(buttonsRow5);
         
         //screen
         screenPanel.setLayout(new GridLayout());
         screenPanel.add(textField);
+        screenPanel.setPreferredSize(new Dimension(300, 60));
         textField.setFont(new Font("Arial", Font.BOLD, 25));
         textField.setEditable(false);
+        
+        //programming Panel
+        programmingPanel.setLayout(grid);
+        programmingPanel.add(benaire);
+        programmingPanel.add(hex);
+        programmingPanel.add(oct);
+        programmingPanel.add(fact);
+        
+        //science Panel
+        sciencePanel.setLayout(grid);
+        sciencePanel.add(sin);
+        sciencePanel.add(cos);
+        sciencePanel.add(sqrt);
+        sciencePanel.add(pwrt);
+        secondSciencePanel.setLayout(grid);
+        secondSciencePanel.add(ciel);
+        secondSciencePanel.add(floor);
+        secondSciencePanel.add(abs);
+        secondSciencePanel.add(random);
         
         //button rows 1
         buttonsRow1.setLayout(grid);
         buttonsRow1.add(clear);
-        buttonsRow1.add(benaire);
+        buttonsRow1.add(del);
         buttonsRow1.add(modulo);
         buttonsRow1.add(division);
         
@@ -141,6 +203,9 @@ public class Calculatrice extends JFrame{
         //egal Panel
         egalPanel.setLayout(new GridLayout());
         egalPanel.add(egal);
+        labelPanel.setMinimumSize(new Dimension(400, 30));
+        labelPanel.setPreferredSize(new Dimension(400, 30));
+        labelPanel.setMaximumSize(new Dimension(400, 30));
         
         //dot Zero Panel
         dotZeroPanel.setLayout(twoCollumnGrid);
@@ -149,14 +214,78 @@ public class Calculatrice extends JFrame{
 
         //Events Listeners
         clear.addActionListener(e -> textField.setText(""));
-
         benaire.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Benaire");
                 textField.setText(Integer.toBinaryString(Integer.parseInt(textField.getText())));
             }
         });
-
+        hex.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Hex");
+                textField.setText(Integer.toHexString(Integer.parseInt(textField.getText())));
+            }
+        });
+        oct.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Benaire");
+                textField.setText(Integer.toOctalString(Integer.parseInt(textField.getText())));
+            }
+        });
+        fact.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Facturial");
+                textField.setText(String.valueOf(Utility.factorial(Integer.parseInt(textField.getText()))));
+            }
+        });
+        sin.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Sin");
+                textField.setText(String.valueOf(Math.sin(Double.parseDouble(textField.getText()))));
+            } 
+        });
+        cos.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Cos");
+                textField.setText(String.valueOf(Math.cos(Double.parseDouble(textField.getText()))));
+            } 
+        });
+        sqrt.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Square");
+                textField.setText(String.valueOf(Math.sqrt(Double.parseDouble(textField.getText()))));
+            } 
+        });
+        pwrt.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                operation = 'p';
+                infoLabel.setText("Power");
+                number1 = Double.parseDouble(textField.getText());
+                clear.doClick();
+            }
+        });
+        ciel.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Smallest Integer Value");
+                textField.setText(String.valueOf(Math.ceil(Double.parseDouble(textField.getText()))));
+            }
+        });
+        abs.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Absolute Value");
+                textField.setText(String.valueOf(Math.abs(Double.parseDouble(textField.getText()))));
+            }
+        });
+        random.addActionListener(e -> {
+                infoLabel.setText("Random Number Generated");
+                textField.setText(String.valueOf(Math.floor(Math.random() * 10)));
+        });
+        floor.addActionListener(e -> {
+            if(!textField.getText().equals("")){
+                infoLabel.setText("Largest Integer Value");
+                textField.setText(String.valueOf(Math.floor(Double.parseDouble(textField.getText()))));
+            }
+        });
         seven.addActionListener(e -> textField.setText(textField.getText() + "7"));
         eight.addActionListener(e -> textField.setText(textField.getText() + "8"));
         nine.addActionListener(e -> textField.setText(textField.getText() + "9"));
@@ -201,6 +330,7 @@ public class Calculatrice extends JFrame{
                         break;
                     case '*': textField.setText(String.valueOf(number1 * number2));break;
                     case '%': textField.setText(String.valueOf(number1 % number2));break;
+                    case 'p': textField.setText(String.valueOf(Math.pow(number1, number2)));break;
                     default:
                         System.out.println("Something is wrong");
                 }
@@ -236,6 +366,11 @@ public class Calculatrice extends JFrame{
                 infoLabel.setText("Modulo");
                 number1 = Double.parseDouble(textField.getText());
                 clear.doClick();
+            }
+        });
+        del.addActionListener(e -> {
+            if(!textField.equals("")) {
+                textField.setText(textField.getText().substring(0, textField.getText().length()-1));
             }
         });
     }
