@@ -1,4 +1,4 @@
-package com.calculatrice.example;
+package com.calculatrice.example.graphicalInterface;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

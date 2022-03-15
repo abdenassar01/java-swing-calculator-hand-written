@@ -1,15 +1,12 @@
-package com.calculatrice.example;
+package com.calculatrice.example.graphicalInterface;
+
+import com.calculatrice.example.arithmitiqueOperation.Utility;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Calculatrice extends JFrame{
-
-    //calculatrice variables
-    double number1;
-    double number2;
-    char operation = 'n';
     
     private JPanel mainPanel;
     private JTextField textField;
@@ -61,6 +58,9 @@ public class Calculatrice extends JFrame{
     private GridLayout twoCollumnGrid;
     
     public Calculatrice(){
+        
+        Utility utility = new Utility();
+        
         mainPanel = new JPanel();
         textField = new JTextField();
         screenPanel = new JPanel();
@@ -142,11 +142,11 @@ public class Calculatrice extends JFrame{
         screenPanel.setLayout(new GridLayout());
         screenPanel.add(textField);
         screenPanel.setPreferredSize(new Dimension(300, 60));
-        textField.setFont(new Font("Arial", Font.BOLD, 25));
+        textField.setFont(new Font("Arial", Font.BOLD, 30));
         textField.setEditable(false);
         
         //programming Panel
-        programmingPanel.setLayout(grid);
+        programmingPanel.setLayout(grid); 
         programmingPanel.add(benaire);
         programmingPanel.add(hex);
         programmingPanel.add(oct);
@@ -217,75 +217,101 @@ public class Calculatrice extends JFrame{
         benaire.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Benaire");
-                textField.setText(Integer.toBinaryString(Integer.parseInt(textField.getText())));
+                textField.setText(utility.toBin(textField.getText()));
+            }else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        }); //done
         hex.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Hex");
-                textField.setText(Integer.toHexString(Integer.parseInt(textField.getText())));
+                textField.setText(utility.toHex(textField.getText()));
+            }else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        });  //done
         oct.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Benaire");
-                textField.setText(Integer.toOctalString(Integer.parseInt(textField.getText())));
+                textField.setText(utility.toOct(textField.getText()));
+            }else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        });  //done
         fact.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Facturial");
-                textField.setText(String.valueOf(Utility.factorial(Integer.parseInt(textField.getText()))));
+                textField.setText(String.valueOf(utility.factorial(Math.round(Float.parseFloat(textField.getText())))));
+            }else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        }); //done
         sin.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Sin");
-                textField.setText(String.valueOf(Math.sin(Double.parseDouble(textField.getText()))));
-            } 
-        });
+                textField.setText(String.valueOf(utility.sin(textField.getText())));
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
+            }
+        });  //done
         cos.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Cos");
-                textField.setText(String.valueOf(Math.cos(Double.parseDouble(textField.getText()))));
-            } 
-        });
+                textField.setText(String.valueOf(utility.cos(textField.getText())));
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
+            }
+        });  //done
         sqrt.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Square");
-                textField.setText(String.valueOf(Math.sqrt(Double.parseDouble(textField.getText()))));
-            } 
-        });
+                textField.setText(String.valueOf(utility.sqrt(textField.getText())));
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
+            }
+        }); //done
         pwrt.addActionListener(e -> {
             if(!textField.getText().equals("")){
-                operation = 'p';
+                utility.setOperation('p');
                 infoLabel.setText("Power");
-                number1 = Double.parseDouble(textField.getText());
+                utility.setNumber1(Double.parseDouble(textField.getText()));
                 clear.doClick();
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        }); //done
         ciel.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Smallest Integer Value");
-                textField.setText(String.valueOf(Math.ceil(Double.parseDouble(textField.getText()))));
+                textField.setText(String.valueOf(utility.ciel(textField.getText())));
+//                textField.setText(String.valueOf(Math.ceil(Double.parseDouble(textField.getText()))));
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        }); //done
         abs.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Absolute Value");
-                textField.setText(String.valueOf(Math.abs(Double.parseDouble(textField.getText()))));
+                textField.setText(String.valueOf(utility.abs(textField.getText())));
+//                textField.setText(String.valueOf(Math.abs(Double.parseDouble(textField.getText()))));
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        });  //done
         random.addActionListener(e -> {
                 infoLabel.setText("Random Number Generated");
-                textField.setText(String.valueOf(Math.floor(Math.random() * 10)));
-        });
+                textField.setText(String.valueOf(utility.random()));
+//                textField.setText(String.valueOf(Math.floor(Math.random() * 10)));
+        });  //done
         floor.addActionListener(e -> {
             if(!textField.getText().equals("")){
                 infoLabel.setText("Largest Integer Value");
-                textField.setText(String.valueOf(Math.floor(Double.parseDouble(textField.getText()))));
+                textField.setText(String.valueOf(utility.floor(textField.getText())));
+//                textField.setText(String.valueOf(Math.floor(Double.parseDouble(textField.getText()))));
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
-        });
+        });   //done
         seven.addActionListener(e -> textField.setText(textField.getText() + "7"));
         eight.addActionListener(e -> textField.setText(textField.getText() + "8"));
         nine.addActionListener(e -> textField.setText(textField.getText() + "9"));
@@ -303,69 +329,70 @@ public class Calculatrice extends JFrame{
         });
         addition.addActionListener(e -> {
             if(!textField.getText().equals("")){
-                operation = '+';
+                utility.setOperation('+');
                 infoLabel.setText("Addition");
-                number1 = Double.parseDouble(textField.getText());
+                utility.setNumber1(Double.parseDouble(textField.getText()));
                 clear.doClick();
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
         });
         egal.addActionListener(e -> {
-            if(!textField.getText().equals("")){
-                infoLabel.setText("");
-                number2 = Double.parseDouble(textField.getText());
-                switch (operation){
-                    case '+': textField.setText(String.valueOf(number1 + number2));break;
-                    case '-': textField.setText(String.valueOf(number1 - number2));break;
-                    case '/':
-                        if(number2 == 0){
-//                            JOptionPane.showMessageDialog(new JFrame(),
-//                                    "La Division Sur 0 est Impossible.",
-//                                    "Arithmetic Exception",
-//                                    JOptionPane.WARNING_MESSAGE);
-                            infoLabel.setText("La Division Sur 0 est Impossible");
-                            clear.doClick();
-                            break;
-                        }
-                        textField.setText(String.valueOf(number1 / number2));
-                        break;
-                    case '*': textField.setText(String.valueOf(number1 * number2));break;
-                    case '%': textField.setText(String.valueOf(number1 % number2));break;
-                    case 'p': textField.setText(String.valueOf(Math.pow(number1, number2)));break;
-                    default:
-                        System.out.println("Something is wrong");
-                }
+            if(!textField.getText().equals("")) {
+                utility.setNumber2(Double.parseDouble(textField.getText()));
+                textField.setText(
+                        String.valueOf(
+                            utility.equals(
+                                utility.getNumber1(), 
+                                utility.getNumber2(), 
+                                utility.getOperation()
+                                )));
+                infoLabel.setText(
+                        utility.getNumber1() + " " + 
+                                utility.getOperation() + " " + 
+                                utility.getNumber2() + " = " + 
+                                textField.getText()
+                );
             }
         });
         soubstraction.addActionListener(e -> {
             if(!textField.getText().equals("")){
-                operation = '-';
+                utility.setOperation('-');
                 infoLabel.setText("Subtraction");
-                number1 = Double.parseDouble(textField.getText());
+                utility.setNumber1(Double.parseDouble(textField.getText()));
                 clear.doClick();
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
         });
         multiplication.addActionListener(e -> {
             if(!textField.getText().equals("")){
-                operation = '*';
+                utility.setOperation('*');
                 infoLabel.setText("Multiplication");
-                number1 = Double.parseDouble(textField.getText());
+                utility.setNumber1(Double.parseDouble(textField.getText()));
                 clear.doClick();
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
         });
         division.addActionListener(e -> {
             if(!textField.getText().equals("")){
-                operation = '/';
+                utility.setOperation('/');
                 infoLabel.setText("Division");
-                number1 = Double.parseDouble(textField.getText());
+                utility.setNumber1(Double.parseDouble(textField.getText()));
                 clear.doClick();
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
         });
         modulo.addActionListener(e -> {
             if(!textField.getText().equals("")){
-                operation = '%';
+                utility.setOperation('%');
                 infoLabel.setText("Modulo");
-                number1 = Double.parseDouble(textField.getText());
+                utility.setNumber1(Double.parseDouble(textField.getText()));
                 clear.doClick();
+            } else {
+                infoLabel.setText("Entrer Un Nombre");
             }
         });
         del.addActionListener(e -> {
