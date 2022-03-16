@@ -35,18 +35,22 @@ public class Utility {
     }
 
     public  double addTwoNumbers(double nbr1, double nbr2){
+        setNumber1(nbr1 + nbr2);
         return nbr1 + nbr2;
     }
     
     public  double soubstractTwoNumbers(double nbr1, double nbr2){
+        setNumber1(nbr1 - nbr2);
         return nbr1 - nbr2;
     }
     
     public  double devideTwoNumbers(double nbr1, double nbr2){
+        setNumber1(nbr1 + nbr2);
         return nbr1 + nbr2;
     }
     
     public  double multiplyTwoNumbers(double nbr1, double nbr2){
+        setNumber1(nbr1 * nbr2);
         return nbr1 * nbr2;
     }
     
@@ -79,6 +83,7 @@ public class Utility {
     }
     
     public  double power(double nbr1, double nbr2){
+        setNumber1(Math.pow(nbr1, nbr2));
         return Math.pow(nbr1, nbr2);
     } 
     

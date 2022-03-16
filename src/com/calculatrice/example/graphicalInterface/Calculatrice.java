@@ -284,7 +284,6 @@ public class Calculatrice extends JFrame{
             if(!textField.getText().equals("")){
                 infoLabel.setText("Smallest Integer Value");
                 textField.setText(String.valueOf(utility.ciel(textField.getText())));
-//                textField.setText(String.valueOf(Math.ceil(Double.parseDouble(textField.getText()))));
             } else {
                 infoLabel.setText("Entrer Un Nombre");
             }

@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
 
-        Calculatrice calculatrice = null;
+        Calculatrice calculatrice ;
         calculatrice = new Calculatrice();
         calculatrice.setSize(400, 500);
         calculatrice.setVisible(true);
